@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvinha</title>
+    <style>
+        body{
+            width: 99vw;
+            height: 97vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        canvas{
+            border-radius: 2px;
+        }
+        
+        .butoes{
+            display: flex;
+            flex-direction: column;
+            margin: 10px;
+        }
+
+        button{
+            margin: 10px 0;
+            border: 2px #2323fdb6 solid;
+            border-radius: 2px;
+            background-color: #c7c7f7b6;
+        }
+        
+        .suave{
+            margin: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #range{
+            width: 250px;
+            margin-bottom: 50px;
+            background-color: transparent;
+        }
+    </style>
+</head>
+<body>
+    <div class="butoes">
+        <button onclick="cargaMovel()">Carga Móvel</button>
+        <button onclick="barraLonga()">Barra Longa</button>
+        <button onclick="barrasParalelas()">Barras Paralelas</button>
+    </div>
+    <div class="suave">
+        <input type="range" name="range" id="range" min="1" max="50" value="1">
+        <canvas id="canvas"></canvas>
+    </div>
+    <script src="main copy.js"></script>
+</body>
+</html>
