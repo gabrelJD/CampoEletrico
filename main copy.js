@@ -15,73 +15,78 @@ function getDistance(x1, x2, y1, y2){
     return ((x1-x2)**2+(y1-y2)**2)**(1/2)
 }
 
-function desenhaLinhas(e){
+function desenhaLinhas(e, c){
     let g = 0
     for (let i = 0; i < partidas; i++){
         for (let j = 0; j < partidas; j++){
-            let xi = canvas.width/partidas/2 + i*canvas.width/partidas
-            let yi = canvas.height/partidas/2 + j*canvas.height/partidas
-            let xf = xi + e[g][0]*2
-            let yf = yi + e[g][1]*2
-            let ang = Math.atan((yf-yi)/(xf-xi)) + Math.PI
+            if(Math.abs(e[g][0]) > 2 || Math.abs(e[g][1]) > 2){
+                let xi = canvas.width/partidas/2 + i*canvas.width/partidas
+                let yi = canvas.height/partidas/2 + j*canvas.height/partidas
+                let xf = xi + e[g][0]
+                let yf = yi + e[g][1]
+                let ang = Math.atan((yf-yi)/(xf-xi)) + Math.PI
+                if (xf - xi == 0){
+                    ang = Math.PI/2 + Math.PI
+                }
 
-            context.beginPath()
+                context.beginPath()
 
-            context.strokeStyle = "blue"
-            context.moveTo(xi, yi)
-            context.lineTo(xf, yf)
-            context.stroke()
+                context.strokeStyle = "blue"
+                context.moveTo(xi, yi)
+                context.lineTo(xf, yf)
+                context.stroke()
 
-            context.beginPath()
-            context.strokeStyle = "green"
-            context.moveTo(xf,yf)
-
-            if(e[g][0] >= 0 & e[g][1] >= 0){ //quarto quadrante
-                let x1 = xf + 5*Math.cos(Math.PI/4 + ang)
-                let y1 = yf + 5*Math.sin(Math.PI/4 + ang)
-                context.lineTo(x1, y1)
-
-                context.moveTo(xf, yf)
-                let x2 = xf + 5*Math.cos(-Math.PI/4 + ang)
-                let y2 = yf + 5*Math.sin(-Math.PI/4 + ang)
-                context.lineTo(x2, y2)
-
-            }else if(e[g][0] <= 0 & e[g][1] >= 0){ //terceiro quadrante
+                context.beginPath()
+                context.strokeStyle = "green"
                 context.moveTo(xf,yf)
-                let x1 = xf - 5*Math.cos(-Math.PI/4 + ang)
-                let y1 = yf - 5*Math.sin(-Math.PI/4 + ang)
-                context.lineTo(x1, y1)
 
-                context.moveTo(xf, yf)
-                let x2 = xf - 5*Math.cos(+Math.PI/4 + ang)
-                let y2 = yf - 5*Math.sin(+Math.PI/4 + ang)
-                context.lineTo(x2, y2)
+                if(e[g][1] >= 0){ //quarto quadrante
+                    if (e[g][0] > 0){
+                        let x1 = xf + 6*Math.cos(Math.PI/4 + ang)
+                        let y1 = yf + 6*Math.sin(Math.PI/4 + ang)
+                        context.lineTo(x1, y1)
+    
+                        context.moveTo(xf, yf)
+                        let x2 = xf + 6*Math.cos(-Math.PI/4 + ang)
+                        let y2 = yf + 6*Math.sin(-Math.PI/4 + ang)
+                        context.lineTo(x2, y2)
+                    }else if (e[g][0] < 0){ //terceiro quadrante
+                        context.moveTo(xf,yf)
+                        let x1 = xf - 6*Math.cos(-Math.PI/4 - ang)
+                        let y1 = yf + 6*Math.sin(-Math.PI/4 - ang)
+                        context.lineTo(x1, y1)
 
-            }else if(e[g][0] <= 0 & e[g][1] <= 0){ //segundo quadrante
-                context.moveTo(xf, yf)
-                let x1 = xf - 5*Math.cos(-Math.PI/4 + ang)
-                let y1 = yf - 5*Math.sin(-Math.PI/4 + ang)
-                context.lineTo(x1, y1)
+                        context.moveTo(xf, yf)
+                        let x2 = xf - 6*Math.cos(Math.PI/4 - ang)
+                        let y2 = yf + 6*Math.sin(Math.PI/4 - ang)
+                        context.lineTo(x2, y2)
+                    }
+                }else{ //segundo quadrante
+                    if (e[g][0] <= 0){
+                        context.moveTo(xf, yf)
+                        let x1 = xf - 6*Math.cos(-Math.PI/4 + ang)
+                        let y1 = yf - 6*Math.sin(-Math.PI/4 + ang)
+                        context.lineTo(x1, y1)
+    
+                        context.moveTo(xf, yf)
+                        let x2 = xf - 6*Math.cos(+Math.PI/4 + ang)
+                        let y2 = yf - 6*Math.sin(+Math.PI/4 + ang)
+                        context.lineTo(x2, y2)
+                    }else{ //primeiro quadrante
+                        context.moveTo(xf, yf)
 
-                context.moveTo(xf, yf)
-                let x2 = xf - 5*Math.cos(+Math.PI/4 + ang)
-                let y2 = yf - 5*Math.sin(+Math.PI/4 + ang)
-                context.lineTo(x2, y2)
-                
-            }else if(e[g][0] >= 0 & e[g][1] <= 0){ //primeiro quadrante
-                context.moveTo(xf, yf)
-
-                let x1 = xf + 5*Math.cos(Math.PI/4 + ang)
-                let y1 = yf + 5*Math.sin(Math.PI/4 + ang)
-                context.lineTo(x1, y1)
-                
-                context.moveTo(xf, yf)
-                let x2 = xf + 5*Math.cos(-Math.PI/4 + ang)
-                let y2 = yf + 5*Math.sin(-Math.PI/4 + ang)
-                context.lineTo(x2, y2)
+                        let x1 = xf + 6*Math.cos(Math.PI/4 + ang)
+                        let y1 = yf + 6*Math.sin(Math.PI/4 + ang)
+                        context.lineTo(x1, y1)
+                        
+                        context.moveTo(xf, yf)
+                        let x2 = xf + 6*Math.cos(-Math.PI/4 + ang)
+                        let y2 = yf + 6*Math.sin(-Math.PI/4 + ang)
+                        context.lineTo(x2, y2)
+                    }
+                }
+                context.stroke()
             }
-
-            context.stroke()
             g++
         }
     }
@@ -173,7 +178,7 @@ function calculaEr(listaBolas){
             cr.push((er[g][0]**2+er[g][1]**2)**(1/2)/2)
         }
     }
-    desenhaLinhas(er, cr, 1)
+    desenhaLinhas(er, cr)
 }
 
 function cargaMovel(){
@@ -200,8 +205,8 @@ function barrasParalelas(){
     context.clearRect(0, 0, canvas.width, canvas.height)
     mouseLivre = false
     allCircles = []
-    criaBarra(150, 3, 300)
-    criaBarra(350, -3, 300)
+    criaBarra(150, 1, 100)
+    criaBarra(350, -1, 100)
 }
 
 function criaBarra(y, carga, deixaMaisRetangular){
@@ -220,28 +225,28 @@ canvas.addEventListener('mousemove', function(event) {
     let x = event.clientX - rect.left;
     let y = event.clientY - rect.top;
     
+    context.clearRect(0, 0, canvas.width, canvas.height)
     if(mouseLivre == true){
-        context.clearRect(0, 0, canvas.width, canvas.height)
         allCircles[0].mudaPos(x, y)
-        for (let i = 0; i < allCircles.length; i++) {
-            allCircles[i].draw(context)
-            allCircles[i].update()
-        }
-        calculaEr(allCircles)
     }
+    for (let i = 0; i < allCircles.length; i++) {
+        allCircles[i].draw(context)
+        allCircles[i].update()
+    }
+    calculaEr(allCircles)
 })
 
 canvas.addEventListener('mouseup', function(event) {
     let rect = canvas.getBoundingClientRect();
     let x = event.clientX - rect.left;
     let y = event.clientY - rect.top;
-
+    
     if (mouseLivre == true){
         context.clearRect(0, 0, canvas.width, canvas.height)
         allCircles.push(new Circle(x, y, 10, (-1)**Math.round(Math.random())))
         for (let i = 0; i < allCircles.length; i++) {
-            allCircles[i].draw(context)
             allCircles[i].update()
+            allCircles[i].draw(context)
         }
         calculaEr(allCircles)
     }
@@ -256,5 +261,4 @@ inputo.addEventListener('input', function partes(input) {
         allCircles[i].draw(context)
     }
     calculaEr(allCircles)
-
 })
