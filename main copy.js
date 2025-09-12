@@ -200,8 +200,8 @@ function barrasParalelas(){
     context.clearRect(0, 0, canvas.width, canvas.height)
     mouseLivre = false
     allCircles = []
-    criaBarra(150, 1.5, 75)
-    criaBarra(350, -1.5, 75)
+    criaBarra(150, 3, 300)
+    criaBarra(350, -3, 300)
 }
 
 function criaBarra(y, carga, deixaMaisRetangular){
@@ -256,4 +256,5 @@ inputo.addEventListener('input', function partes(input) {
         allCircles[i].draw(context)
     }
     calculaEr(allCircles)
+
 })
