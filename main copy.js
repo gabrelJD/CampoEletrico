@@ -1,6 +1,7 @@
 let canvas = document.getElementById("canvas")
 let context = canvas.getContext("2d")
 let inputo = document.getElementById("range")
+let textoInfo = document.getElementById("apareceInfo")
 let allCircles = []
 let mouseLivre = false
 let modo;
@@ -199,6 +200,8 @@ function cargaMovel(){
     
     mouseLivre = true
     modo = "cargaMovel"
+
+    textoInfo.innerHTML = "Neste modo você pode verificar o campo elétrico gerado por cargas pontuais e suas interações; Tente mexer o mouse e clicar na tela para adicionar mais cargas (Obs.: o sinal da carga é aleatório, mas unitário)"
 }
 
 function barraLonga(){
@@ -208,6 +211,8 @@ function barraLonga(){
     
     mouseLivre = false
     modo = "barraLonga"
+
+    textoInfo.innerHTML = "Neste modo você pode verificar o campo elétrico gerado por uma barra fina finita. Você consegue imaginar uma superfície Gaussiana conveniente para esse campo?"
 }
 
 function barrasParalelas(){
@@ -218,6 +223,8 @@ function barrasParalelas(){
     
     mouseLivre = false
     modo = "barrasParalelas"
+
+    textoInfo.innerHTML = "Neste modo você pode verificar o campo elétrico gerado por duas barras finas longas, problema parecido com o visto em capacitores de placas paralelas. Por que o campo é nulo fora do sistema?"
 }
 
 function criaBarra(y, carga, deixaMaisRetangular){
