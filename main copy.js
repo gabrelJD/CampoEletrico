@@ -3,6 +3,7 @@ let context = canvas.getContext("2d")
 let inputo = document.getElementById("range")
 let allCircles = []
 let mouseLivre = false
+let modo;
 
 canvas.width = 500
 canvas.height = 500
@@ -19,7 +20,12 @@ function desenhaLinhas(e, c){
     let g = 0
     for (let i = 0; i < partidas; i++){
         for (let j = 0; j < partidas; j++){
-            if(Math.abs(e[g][0]) > 2 || Math.abs(e[g][1]) > 2){
+            if (modo == "barrasParalelas"){
+                limite = 3
+            }else{
+                limite = 1
+            }
+                if(Math.abs(e[g][0]) > limite || Math.abs(e[g][1]) > limite){
                 let xi = canvas.width/partidas/2 + i*canvas.width/partidas
                 let yi = canvas.height/partidas/2 + j*canvas.height/partidas
                 let xf = xi + e[g][0]
@@ -192,21 +198,26 @@ function cargaMovel(){
     }
     
     mouseLivre = true
+    modo = "cargaMovel"
 }
 
 function barraLonga(){
-    mouseLivre = false
     allCircles = []
     context.clearRect(0, 0, canvas.width, canvas.height)
     criaBarra(250, 1.1, 11)
+    
+    mouseLivre = false
+    modo = "barraLonga"
 }
 
 function barrasParalelas(){
     context.clearRect(0, 0, canvas.width, canvas.height)
-    mouseLivre = false
     allCircles = []
-    criaBarra(150, 1, 100)
-    criaBarra(350, -1, 100)
+    criaBarra(150, 2, 100)
+    criaBarra(350, -2, 100)
+    
+    mouseLivre = false
+    modo = "barrasParalelas"
 }
 
 function criaBarra(y, carga, deixaMaisRetangular){
