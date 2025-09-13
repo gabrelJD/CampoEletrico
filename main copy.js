@@ -201,6 +201,7 @@ function cargaMovel(){
     mouseLivre = true
     modo = "cargaMovel"
 
+    console.log(textoInfo)
     textoInfo.innerHTML = "Neste modo você pode verificar o campo elétrico gerado por cargas pontuais e suas interações; Tente mexer o mouse e clicar na tela para adicionar mais cargas (Obs.: o sinal da carga é aleatório, mas unitário)"
 }
 
@@ -280,3 +281,4 @@ inputo.addEventListener('input', function partes(input) {
     }
     calculaEr(allCircles)
 })
+
