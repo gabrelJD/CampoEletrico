@@ -225,7 +225,7 @@ function barrasParalelas(){
     mouseLivre = false
     modo = "barrasParalelas"
 
-    textoInfo.innerHTML = "Neste modo você pode verificar o campo elétrico gerado por duas barras finas longas, problema parecido com o visto em capacitores de placas paralelas. Por que o campo é nulo fora do sistema?"
+    textoInfo.innerHTML = "Neste modo você pode verificar uma seção do campo elétrico gerado por duas placas finas longas, problema parecido com o visto em capacitores de placas paralelas. Por que o campo é nulo fora do sistema?"
 }
 
 function criaBarra(y, carga, deixaMaisRetangular){
@@ -281,4 +281,5 @@ inputo.addEventListener('input', function partes(input) {
     }
     calculaEr(allCircles)
 })
+
 
