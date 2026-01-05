@@ -22,76 +22,79 @@ function desenhaLinhas(e, c){
     for (let i = 0; i < partidas; i++){
         for (let j = 0; j < partidas; j++){
             if (modo == "barrasParalelas"){
-                limite = 3
+                limite = 5
             }else{
                 limite = 1
             }
-                if(Math.abs(e[g][0]) > limite || Math.abs(e[g][1]) > limite){
+            if(Math.abs(e[g][0]) > limite || Math.abs(e[g][1]) > limite){
                 let xi = canvas.width/partidas/2 + i*canvas.width/partidas
                 let yi = canvas.height/partidas/2 + j*canvas.height/partidas
                 let xf = xi + e[g][0]
                 let yf = yi + e[g][1]
-                let ang = Math.atan((yf-yi)/(xf-xi)) + Math.PI
+                let ang = Math.atan((yf - yi)/(xf - xi))
                 if (xf - xi == 0){
                     ang = Math.PI/2 + Math.PI
                 }
 
                 context.beginPath()
 
-                context.strokeStyle = "blue"
+                context.strokeStyle = "black"
+                context.fillStyle = "black"
                 context.moveTo(xi, yi)
                 context.lineTo(xf, yf)
                 context.stroke()
 
                 context.beginPath()
-                context.strokeStyle = "green"
                 context.moveTo(xf,yf)
 
-                if(e[g][1] >= 0){ //quarto quadrante
-                    if (e[g][0] > 0){
-                        let x1 = xf + 6*Math.cos(Math.PI/4 + ang)
-                        let y1 = yf + 6*Math.sin(Math.PI/4 + ang)
-                        context.lineTo(x1, y1)
-    
-                        context.moveTo(xf, yf)
-                        let x2 = xf + 6*Math.cos(-Math.PI/4 + ang)
-                        let y2 = yf + 6*Math.sin(-Math.PI/4 + ang)
-                        context.lineTo(x2, y2)
-                    }else if (e[g][0] < 0){ //terceiro quadrante
-                        context.moveTo(xf,yf)
-                        let x1 = xf - 6*Math.cos(-Math.PI/4 - ang)
-                        let y1 = yf + 6*Math.sin(-Math.PI/4 - ang)
+                diffX = xf - xi
+                diffY = yf - yi
+
+                let w = 6
+                let r = 6
+
+                if (diffX < 0) {
+                    if (diffY < 0) {
+                        let x1 = xf + w*Math.cos(Math.PI/r + ang)
+                        let y1 = yf + w*Math.sin(Math.PI/r + ang)
                         context.lineTo(x1, y1)
 
-                        context.moveTo(xf, yf)
-                        let x2 = xf - 6*Math.cos(Math.PI/4 - ang)
-                        let y2 = yf + 6*Math.sin(Math.PI/4 - ang)
+                        let x2 = xf + w*Math.cos(-Math.PI/r + ang)
+                        let y2 = yf + w*Math.sin(-Math.PI/r + ang)
                         context.lineTo(x2, y2)
+                        context.lineTo(xf, yf)
+                    } else {
+                        let x1 = xf + w*Math.cos(-Math.PI/r - ang)
+                        let y1 = yf - w*Math.sin(-Math.PI/r - ang)
+                        context.lineTo(x1, y1)
+
+                        let x2 = xf + w*Math.cos(Math.PI/r - ang)
+                        let y2 = yf - w*Math.sin(Math.PI/r - ang)
+                        context.lineTo(x2, y2)
+                        context.lineTo(xf, yf)
                     }
-                }else{ //segundo quadrante
-                    if (e[g][0] <= 0){
-                        context.moveTo(xf, yf)
-                        let x1 = xf - 6*Math.cos(-Math.PI/4 + ang)
-                        let y1 = yf - 6*Math.sin(-Math.PI/4 + ang)
+                } else {
+                    if (diffY < 0) {
+                        let x1 = xf - w*Math.cos(-Math.PI/r + ang)
+                        let y1 = yf - w*Math.sin(-Math.PI/r + ang)
                         context.lineTo(x1, y1)
-    
-                        context.moveTo(xf, yf)
-                        let x2 = xf - 6*Math.cos(+Math.PI/4 + ang)
-                        let y2 = yf - 6*Math.sin(+Math.PI/4 + ang)
+                
+                        let x2 = xf - w*Math.cos(+Math.PI/r + ang)
+                        let y2 = yf - w*Math.sin(+Math.PI/r + ang)
                         context.lineTo(x2, y2)
-                    }else{ //primeiro quadrante
-                        context.moveTo(xf, yf)
+                        context.lineTo(xf, yf)
+                    } else {
+                        let x1 = xf - w*Math.cos(-Math.PI/r - ang)
+                        let y1 = yf + w*Math.sin(-Math.PI/r - ang)
+                        context.lineTo(x1, y1)
 
-                        let x1 = xf + 6*Math.cos(Math.PI/4 + ang)
-                        let y1 = yf + 6*Math.sin(Math.PI/4 + ang)
-                        context.lineTo(x1, y1)
-                        
-                        context.moveTo(xf, yf)
-                        let x2 = xf + 6*Math.cos(-Math.PI/4 + ang)
-                        let y2 = yf + 6*Math.sin(-Math.PI/4 + ang)
+                        let x2 = xf - w*Math.cos(Math.PI/r - ang)
+                        let y2 = yf + w*Math.sin(Math.PI/r - ang)
                         context.lineTo(x2, y2)
+                        context.lineTo(xf, yf)
                     }
                 }
+                context.fill()
                 context.stroke()
             }
             g++
@@ -281,5 +284,3 @@ inputo.addEventListener('input', function partes(input) {
     }
     calculaEr(allCircles)
 })
-
-
