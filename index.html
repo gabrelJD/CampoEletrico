@@ -5,9 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Campo Eletrico</title>
     <style>
-        body{
-            width: 99vw;
-            height: 97vh;
+        main{
+            height: 94vh;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -52,20 +51,25 @@
     </style>
 </head>
 <body>
-    <div class="apareceInfo" id="apareceInfo">
-    </div>
-    <div class="butoes">
-        <button onclick="cargaMovel()">Carga Móvel</button>
-        <button onclick="barraLonga()">"Barra"</button>
-        <button onclick="barrasParalelas()">Placas Longas </br>Paralelas</button>
-    </div>
-    <div class="suave">
-        <input type="range" name="range" id="range" min="1" max="50" value="1">
-        <canvas id="canvas"></canvas>
-    </div>
-    <div class="apareceInfo"></div>
+    <header class="cabeca">
+        <a href="gabreljd.github.io/CampoEletrico3D">
+            Ir para o 3D
+        </a>
+    </header>
+    <main>
+        <div class="apareceInfo" id="apareceInfo">
+        </div>
+        <div class="butoes">
+            <button onclick="cargaMovel()">Carga Móvel</button>
+            <button onclick="barraLonga()">"Barra"</button>
+            <button onclick="barrasParalelas()">Placas Longas </br>Paralelas</button>
+        </div>
+        <div class="suave">
+            <input type="range" name="range" id="range" step="2" min="2" max="50" value="1">
+            <canvas id="canvas"></canvas>
+        </div>
+        <div class="apareceInfo"></div>
+    </main>
     <script src="main copy.js"></script>
 </body>
 </html>
-
-
